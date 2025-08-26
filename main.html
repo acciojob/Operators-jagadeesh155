@@ -1,16 +1,94 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator & Text Changer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    .container {
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      margin: 5px;
+      padding: 8px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 10px;
+      font-weight: bold;
+      color: darkblue;
+    }
+    .division {
+      margin: 5px 0;
+      padding: 8px;
+      background: #f2f2f2;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+
+  <!-- Calculator Section -->
+  <div class="container">
+    <input type="number" id="num1" placeholder="Enter first number">
+    <select id="operator">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="number" id="num2" placeholder="Enter second number">
+    <button id="calculate">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <!-- Text Containers -->
+  <div class="container">
+    <div class="division">Hello</div>
+    <div class="division">Welcome</div>
+    <div class="division">To</div>
+    <div class="division">My</div>
+    <div class="division">Class</div>
+    <button id="change_text">Change Text</button>
+  </div>
+
+  <script>
+    // Calculator Logic
+    document.getElementById("calculate").addEventListener("click", function() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+      const operator = document.getElementById("operator").value;
+      let result;
+
+      if (isNaN(num1) || isNaN(num2)) {
+        result = "Please enter both numbers";
+      } else {
+        switch(operator) {
+          case "+": result = num1 + num2; break;
+          case "-": result = num1 - num2; break;
+          case "*": result = num1 * num2; break;
+          case "/": 
+            result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero"; 
+            break;
+        }
+      }
+      document.getElementById("result").innerText = "Result: " + result;
+    });
+
+    // Text Changer Logic
+    document.getElementById("change_text").addEventListener("click", function() {
+      const newText = ["Bye", "Good Bye", "To", "Your", "Class"];
+      const divisions = document.querySelectorAll(".division");
+      divisions.forEach((div, index) => {
+        div.innerText = newText[index];
+      });
+    });
+  </script>
 
 </body>
-
 </html>
